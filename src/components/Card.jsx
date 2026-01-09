@@ -1,4 +1,6 @@
-export default function Card({ politician }){
+import React from "react"
+
+const Card = React.memo(({ politician }) => {
     return(
         <div className="card">
             <h2>{politician.name}</h2>
@@ -7,4 +9,6 @@ export default function Card({ politician }){
             <p>{politician.biography}</p>
         </div>
     )
-}
+})
+
+export default Card

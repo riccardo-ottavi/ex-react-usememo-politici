@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import './App.css'
 import Card from './components/Card'
 
@@ -19,12 +19,19 @@ function App() {
     }
   }, [])
 
+  const filteredPoliticians = useMemo(() => {
+  return politicians.filter(p =>
+    p.name.toLowerCase().includes(filterQuery.toLowerCase()) || 
+    p.biography.toLowerCase().includes(filterQuery.toLowerCase())
+  );
+}, [politicians, filterQuery]);
+
   return (
     <>
       <div className="container">
         <h1>Lista Politici</h1>
-        <input type="text" onChange={e => {setFilterQuery(e.target.value)}}/>
-        {politicians.map(p => (
+        <input type="text" onChange={e => { setFilterQuery(e.target.value) }} />
+        {filteredPoliticians.map(p => (
           <Card
             id={p.name}
             politician={p}
