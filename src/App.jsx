@@ -5,6 +5,7 @@ import Card from './components/Card'
 function App() {
 
   const [politicians, setPoliticians] = useState([])
+  const [filterQuery, setFilterQuery] = useState("")
 
   async function fetchPolicians() {
     const res = await fetch("http://localhost:3333/politicians")
@@ -18,12 +19,11 @@ function App() {
     }
   }, [])
 
-  console.log(politicians)
-
   return (
     <>
       <div className="container">
         <h1>Lista Politici</h1>
+        <input type="text" onChange={e => {setFilterQuery(e.target.value)}}/>
         {politicians.map(p => (
           <Card
             id={p.name}
