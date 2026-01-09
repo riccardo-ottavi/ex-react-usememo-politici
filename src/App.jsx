@@ -1,25 +1,37 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import Card from './components/Card'
 
 function App() {
-  
+
   const [politicians, setPoliticians] = useState([])
 
-  async function fetchPolicians(){
+  async function fetchPolicians() {
     const res = await fetch("http://localhost:3333/politicians")
     const data = await res.json();
     setPoliticians(data)
   }
 
-  useEffect(() => {{
-    fetchPolicians();
-  }},[])
+  useEffect(() => {
+    {
+      fetchPolicians();
+    }
+  }, [])
 
   console.log(politicians)
 
   return (
     <>
-      <h1>Prova</h1>
+      <div className="container">
+        <h1>Lista Politici</h1>
+        {politicians.map(p => (
+          <Card
+            id={p.name}
+            politician={p}
+          />
+        ))}
+      </div>
+
     </>
   )
 }
