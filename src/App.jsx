@@ -33,7 +33,7 @@ function App() {
         <input type="text" onChange={e => { setFilterQuery(e.target.value) }} />
         {filteredPoliticians.map(p => (
           <Card
-            id={p.name}
+            key={p.id}
             politician={p}
           />
         ))}
